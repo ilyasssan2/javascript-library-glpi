@@ -24,7 +24,10 @@ function createQueryString ({items, criteria, metacriteria}) {
                                 const element2 = element[index]
                                 queryString+= `${key}[${index}]=${element2}&`
                             }
-                        } else {
+                        }else if(typeof element === "object" ){
+                            queryString+= Object.entries(element).map(([key2,value])=> `${key}[${key2}]=${value}`).join("&")+"&"
+                        } 
+                        else {
                             queryString+= `${key}=${element}&`
                         }
                     }
